@@ -57,3 +57,11 @@ input[type="number"]{
   align-content: center;
   justify-content: center;
 }
+
+.bg_green{
+  background-color: green;
+}
+
+.bg_red{
+  background-color: red;
+}

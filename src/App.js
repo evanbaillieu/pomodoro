@@ -13,10 +13,12 @@ const App = () => {
     breakMinutes:5,
     breakSeconds:0
   })
+  
   const defaultClass = (isHover) => (isHover)?"menu_btn menu_btn--white":"menu_btn"; 
   useEffect(()=>{
     console.log(settings)
   }, [settings])
+
   return (
     <div className='contenaire'>
       {(isSetting)?(<Settings settings={settings} setSettings={setSettings}/>):(<Timer settings={settings}/>)}

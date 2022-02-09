@@ -5,14 +5,17 @@ const Timer = ({ settings }) => {
   const [minutes, setMinutes] = useState(settings.workMinutes);
   const [seconds, setSeconds] = useState(settings.workSeconds);
   const [displayMessage, setDisplayMessage] = useState(false);
+  const [color, setColor] = useState("")
   const [isStart, setIsStart] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
+
       if (!isStart) {
         return;
       }
-
+      const colorchoix = minutes == 0 && seconds <= 20 ? "red" : "green";
+      setColor(colorchoix)
       if (seconds === 0) {
         if (minutes !== 0) {
           setSeconds(59);
@@ -35,8 +38,6 @@ const Timer = ({ settings }) => {
   const timerMinutes = minutes < 10 ? `0${minutes}` : minutes;
   const timerSeconds = seconds < 10 ? `0${seconds}` : seconds;
 
-  const color = minutes == 0 && seconds <= 20 ? "red" : "green";
-
   const onStart = () => {
     setIsStart(true);
   };
@@ -49,9 +50,9 @@ const Timer = ({ settings }) => {
     setSeconds(settings.workSeconds);
     setMinutes(settings.workMinutes);
   }, [minutes, seconds]);
-
+  
   return (
-    <div class="timer">
+    <div class={`timer bg_${color}`}>
       <p class="timer_text">{`${timerMinutes} : ${timerSeconds}`}</p>
       <div class="timer_actionbar">
         <button class="timer_btn" onClick={onStart}>start</button>
