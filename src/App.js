@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import react, {useEffect, useState} from 'react'
+import classNames from 'classnames'
+import Timer from './view/timer/'
+import Settings from './view/settings'
+import  "./App.css"
 
-function App() {
+
+const App = () => {
+  const [isSetting, setIsSetting] = useState(false)
+  const [settings, setSettings] = useState({
+    workMinutes: 20,
+    workSeconds: 0,
+    breakMinutes:5,
+    breakSeconds:0
+  })
+  const defaultClass = (isHover) => (isHover)?"menu_btn menu_btn--white":"menu_btn"; 
+  useEffect(()=>{
+    console.log(settings)
+  }, [settings])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='contenaire'>
+      {(isSetting)?(<Settings settings={settings} setSettings={setSettings}/>):(<Timer settings={settings}/>)}
+      <div class="actionbar">
+        <button className={defaultClass(!isSetting)}onClick={()=> setIsSetting(false)}></button>
+        <button className={defaultClass(isSetting)} onClick={()=> setIsSetting(true)}></button>
+      </div>
+      
     </div>
   );
 }
